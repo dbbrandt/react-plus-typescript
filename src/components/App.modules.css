@@ -1,0 +1,27 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.header {
+    margin: 0 0 50px;
+    text-align: center;
+}
+
+.siteTitle {
+    font-size: 32px;
+    margin: 0 0 10px;
+}
+
+.pizzaList {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+}
+
+.pizzaList .li {
+    border: 1px solid #eee19f;
+    margin: 5px;
+    padding-left: 10px;
+}

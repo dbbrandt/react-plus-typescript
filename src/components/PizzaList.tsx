@@ -1,20 +1,16 @@
 import React from "react";
 import AppCSS from './App.modules.css';
-import {useStateDispatch} from "./AppState";
 import {Pizza} from "../types";
+import {AddToCartProps, withAddToCart} from "./AddToCart";
 
-interface Props {
+interface Props extends AddToCartProps{
     pizza: Pizza;
 }
 
-const PizzaList: React.FC<Props> = ({ pizza}) => {
+const PizzaList: React.FC<Props> = ({ pizza, addToCart}) => {
 
-    const dispatch = useStateDispatch();
-
-    // It is critical to create a new object when returning state to make sure the state change is registered
-    // in order to rerender anything dependent on those changes.
     const handleAddToCartClick = () => {
-        dispatch({type: 'ADD_TO_CART', payload: {...pizza,quantity: 1 }})
+        addToCart(pizza);
     };
 
     return (
@@ -29,4 +25,4 @@ const PizzaList: React.FC<Props> = ({ pizza}) => {
     );
 }
 
-export default PizzaList;
+export default withAddToCart(PizzaList);

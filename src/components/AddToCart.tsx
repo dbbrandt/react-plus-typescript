@@ -9,7 +9,8 @@ export interface AddToCartProps {
 export function withAddToCart<OriginalProps extends AddToCartProps>(
   ChildComponent: React.ComponentType<OriginalProps>
 ) {
-  const AddToCartHOC = (props: Omit<OriginalProps, keyof AddToCartProps>) => {
+  return (props: Omit<OriginalProps, keyof AddToCartProps>) => { //Omit needed because the  component this
+                                  // is wrapping will not have AddToCartProps as this is the whole purpoase of the hOC.
     const dispatch = useStateDispatch();
     const handleAddToCartClick: AddToCartProps['addToCart'] = (item) => {
       dispatch({
@@ -19,11 +20,9 @@ export function withAddToCart<OriginalProps extends AddToCartProps>(
     };
     return (
       <ChildComponent
-        {...(props as OriginalProps)}
+        {...(props as OriginalProps)} // assert as OriginalProps is needed because of the Omit above
         addToCart={handleAddToCartClick}
       />
     );
   };
-
-  return AddToCartHOC;
 }
